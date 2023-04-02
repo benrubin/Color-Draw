@@ -168,7 +168,7 @@ function keyPressed() {
       count = 0;
   } else if (key === 'F') {  // crayon
       crayon = false;
-  } else if (key === 'X') {
+  } else if (key === 'X') { // crayon off
       crayon = true;
   } else if (key === 'G' ) {  // pulls everything to center
         mm = false;
@@ -177,9 +177,9 @@ function keyPressed() {
         mx2 = 0;
         my1 = 0;
         my2 = 0;
-  } else if (key === 'A') {
+  } else if (key === 'A') { //jiggle increase
     scribble.roughness++;
-  } else if (key === 'S') {
+  } else if (key === 'S') { //jiggle decrease
     scribble.roughness--;
   } 
 else {
