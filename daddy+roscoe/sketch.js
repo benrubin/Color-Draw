@@ -57,8 +57,13 @@ function setup() {
 }
 
 function windowResized() {
-	resizeCanvas(windowWidth, windowHeight);
-	neverPressed = false
+	if (neverPressed == false) {
+		resizeCanvas(windowWidth, windowHeight);
+		neverPressed = false
+	}
+	if (neverPressed == true) {
+		setup()
+	}
   }
 
 function draw() {
