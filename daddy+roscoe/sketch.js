@@ -31,7 +31,7 @@ var scribble;            // global mode
 
 
 function setup() {
-	createCanvas(1450, 1450);
+	createCanvas(windowWidth, windowHeight);
 	cx = width/2; 
 	cy = height/2;
 	background(64);
@@ -57,6 +57,10 @@ function setup() {
  	
 
 }
+
+function windowResized() {
+	setup()
+  }
 
 function draw() {
 	var rr;
