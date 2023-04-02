@@ -50,14 +50,17 @@ function setup() {
  	textSize(40);
  	textAlign(LEFT,TOP);
 	text("COLOR DRAW", 10, 50);
-	neverPressed = true;
     scribble = new Scribble(); 
     scribble.roughness = 0.5;       // changes the roughness of lines
     crayon = false;
+	neverPressed = true
+ 	
+
 }
 
 function windowResized() {
-	setup()
+	resizeCanvas(windowWidth, windowHeight);
+	neverPressed = false
   }
 
 function draw() {
