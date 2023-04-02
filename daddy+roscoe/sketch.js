@@ -54,8 +54,6 @@ function setup() {
     scribble.roughness = 0.5;       // changes the roughness of lines
     crayon = false;
 	neverPressed = true
- 	
-
 }
 
 function windowResized() {
