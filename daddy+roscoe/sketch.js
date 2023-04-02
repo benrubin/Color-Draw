@@ -28,10 +28,7 @@ var mySound;
 var crayon = false;
 var scribble;            // global mode
 
-
-
-function setup() {
-	createCanvas(windowWidth, windowHeight);
+function initialize_splash() {
 	cx = width/2; 
 	cy = height/2;
 	background(64);
@@ -50,15 +47,23 @@ function setup() {
  	textSize(40);
  	textAlign(LEFT,TOP);
 	text("COLOR DRAW", 10, 50);
+}
+
+function setup() {
+	createCanvas(windowWidth, windowHeight);
     scribble = new Scribble(); 
     scribble.roughness = 0.5;       // changes the roughness of lines
     crayon = false;
 	neverPressed = true
+	initialize_splash();
 }
 
 function windowResized() {
 	resizeCanvas(windowWidth, windowHeight);
-	neverPressed = false
+	if (neverPressed) {
+		initialize_splash();
+	}
+	// neverPressed = false
   }
 
 function draw() {
@@ -68,24 +73,24 @@ function draw() {
 	rr = random(255);
 	gg = random(255);
 	bb = random(255);
-	fill(r,g,b);
+	// fill(r,g,b);
 	textSize(28);
 	noStroke();
 	textAlign(LEFT,TOP);
-	text("By Roscoe xxx Rubin-Rottenberg", 10, 88);
+	text("By Beau", 10, 88);
     // text(key, 33,105); // Display last key pressed.
     
 
     if (neverPressed) {
 		function splashScreen() {
 			fill(25, 25, 25);
-			var scFact = width/1440; // scale factor
-			var dt = (frameCount % (width/50)) * 20;
+			var scFact = windowWidth/1440; // scale factor
 			r = random(255);
 			g = random(255);
 			b = random(255);
 			stroke(r,g,b);
 			strokeWeight(30*scFact);
+			var dt = (frameCount % (windowWidth/50)) * 10;
 			line(cx-dt,cy-dt,cx+dt,cy-dt);
 			line(cx+dt,cy-dt,cx+dt,cy+dt);
 			line(cx+dt,cy+dt,cx-dt,cy+dt);
