@@ -54,8 +54,6 @@ function setup() {
     scribble = new Scribble(); 
     scribble.roughness = 0.5;       // changes the roughness of lines
     crayon = false;
- 	
-
 }
 
 function windowResized() {
@@ -78,22 +76,26 @@ function draw() {
     
 
     if (neverPressed) {
-        fill(25, 25, 25);
-    //	var dt = (millis() - Tstart);
-        var dt = (frameCount % (width/50)) * 20;
-        r = random(255);
-        g = random(255);
-        b = random(255);
-        stroke(r,g,b);
-        strokeWeight(30);
-        line(cx-dt,cy-dt,cx+dt,cy-dt);
-        line(cx+dt,cy-dt,cx+dt,cy+dt);
-        line(cx+dt,cy+dt,cx-dt,cy+dt);
-        line(cx-dt,cy+dt,cx-dt,cy-dt);
-        textAlign(CENTER,CENTER);
-        textSize(200);
-        stroke(255-r, 255-g, 255-b);
-        text("COLOR DRAW", cx, cy-20);
+		function splashScreen() {
+			fill(25, 25, 25);
+			var scFact = width/1440; // scale factor
+			var dt = (frameCount % (width/50)) * 20;
+			r = random(255);
+			g = random(255);
+			b = random(255);
+			stroke(r,g,b);
+			strokeWeight(30*scFact);
+			line(cx-dt,cy-dt,cx+dt,cy-dt);
+			line(cx+dt,cy-dt,cx+dt,cy+dt);
+			line(cx+dt,cy+dt,cx-dt,cy+dt);
+			line(cx-dt,cy+dt,cx-dt,cy-dt);
+			textAlign(CENTER,CENTER);
+			textSize(200*scFact);
+			stroke(255-r, 255-g, 255-b);
+			text("COLOR DRAW", cx, cy-20*scFact);
+		}
+		splashScreen()
+        
     } else {
         background(25, 25, 25);
         fill(0, 102, 153);
