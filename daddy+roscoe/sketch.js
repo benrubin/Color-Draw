@@ -3,6 +3,9 @@ var hh;
 var r;
 var g;
 var b;
+var tc_r;
+var tc_g;
+var tc_b;
 var x1;
 var y1;
 var x2;
@@ -32,21 +35,52 @@ function initialize_splash() {
 	cx = width/2; 
 	cy = height/2;
 	background(64);
-	frameRate(60	);
+	frameRate(24);
 	count = 0;
 	ww = 32;
  	hh = 132;
  	r = 0; g = 0; b = 255;
+	tc_r = 127;
+	tc_b = 127;
+	tc_g = 127;
  	x1 = 200;
  	y1 = 200;
  	x2 = 200;
  	y2 = 200;
  	sw = 4;
  	background(237, 34, 93);
- 	fill(0, 102, 153);
- 	textSize(40);
- 	textAlign(LEFT,TOP);
-	text("COLOR DRAW", 10, 50);
+ 	// fill(0, 102, 153);
+ 	// textSize(40);
+ 	// textAlign(LEFT,TOP);
+	// text("COLOR DRAW", 10, 50);
+}
+
+function splashScreen() {
+	fill(25, 25, 25);
+	var scFact = windowWidth/1440; // scale factor
+	r = random(255);
+	g = random(255);
+	b = random(255);
+	stroke(r,g,b);
+	strokeWeight(20*scFact);
+	var dt = (frameCount % (windowWidth/15)) * 15 * scFact;
+	line(cx-dt,cy-dt,cx+dt,cy-dt);
+	line(cx+dt,cy-dt,cx+dt,cy+dt);
+	line(cx+dt,cy+dt,cx-dt,cy+dt);
+	line(cx-dt,cy+dt,cx-dt,cy-dt);
+	textAlign(CENTER,CENTER);
+	textSize(200*scFact);
+	if (dt < 150) {
+		tc_r = 255-r;
+		tc_b = 255-b;
+		tc_g = 255-g;
+	}
+	stroke(tc_r, tc_b, tc_g);
+	fill(255-tc_r,255-tc_g,255-tc_b);
+
+	// stroke(tc_r, tc_b, tc_g);
+	text("COLOR DRAW", cx, cy);
+	// -20*scFact);
 }
 
 function setup() {
@@ -63,7 +97,6 @@ function windowResized() {
 	if (neverPressed) {
 		initialize_splash();
 	}
-	// neverPressed = false
   }
 
 function draw() {
@@ -77,31 +110,10 @@ function draw() {
 	textSize(28);
 	noStroke();
 	textAlign(LEFT,TOP);
-	text("By Beau", 10, 88);
+	// text("By Beau", 10, 88);
     // text(key, 33,105); // Display last key pressed.
-    
-
     if (neverPressed) {
-		function splashScreen() {
-			fill(25, 25, 25);
-			var scFact = windowWidth/1440; // scale factor
-			r = random(255);
-			g = random(255);
-			b = random(255);
-			stroke(r,g,b);
-			strokeWeight(30*scFact);
-			var dt = (frameCount % (windowWidth/50)) * 10;
-			line(cx-dt,cy-dt,cx+dt,cy-dt);
-			line(cx+dt,cy-dt,cx+dt,cy+dt);
-			line(cx+dt,cy+dt,cx-dt,cy+dt);
-			line(cx-dt,cy+dt,cx-dt,cy-dt);
-			textAlign(CENTER,CENTER);
-			textSize(200*scFact);
-			stroke(255-r, 255-g, 255-b);
-			text("COLOR DRAW", cx, cy-20*scFact);
-		}
 		splashScreen()
-        
     } else {
         background(25, 25, 25);
         fill(0, 102, 153);
@@ -111,11 +123,11 @@ function draw() {
         fill(r,g,b);
         textSize(28);
         textAlign(LEFT,TOP);
-        text("By Roscoe xxxxxyyyy xxx  zz Rubin-Rottenberg", 10, 88);
+        text("By Beau", 10, 88);
         text(key, 33,105); // Display last key pressed.
     }
 
-      if (mouseIsPressed) {
+    if (mouseIsPressed) {
         stroke(r,g,b);
         x2 = mouseX;
         y2 = mouseY;
@@ -123,16 +135,16 @@ function draw() {
         line(x1, y1, x2, y2);
       }  
 
-      for (var i = 0; i < count; i++) {
-        lines[i].update();
-        lines[i].draw();
-        }	
+	// Draw the lines
+	for (var i = 0; i < count; i++) {
+	lines[i].update();
+	lines[i].draw();
+	}	
 }   
  
 function preload() {
   	mySound = loadSound('assetts/bip.mp3');
 }
-
 
 function mousePressed() {
 	neverPressed = false;
@@ -149,8 +161,6 @@ function mouseReleased() {
 	lines[count] = new Aline(x1-cx, y1-cy, x2-cx, y2-cy, r, g, b);
 	count++;
 }
-
-
 
 function keyPressed() {
   if (keyCode === UP_ARROW) {
@@ -190,7 +200,6 @@ function keyPressed() {
 else {
 return(false);
   }
-
 }
 
 function Aline(_x1, _y1, _x2, _y2, _r, _g, _b) {
@@ -249,18 +258,3 @@ Aline.prototype.draw = function() {
         line(this.x1+cx, this.y1+cy, this.x2+cx, this.y2+cy);  
     }
 }
-
-
-// function draw() {
-// 	r = rand
-// 	r = 0; g = 0; b = 255;
-//   	var c = color(r, g, b);  // Define color 'c'
-// 	fill(c);  // Use color variable 'c' as fill color
-// 	noStroke();  // Don't draw a stroke around shapes // 480;
-// 	// r = (r - 153) * 0.98 + 153;
-// 	// g = (g - 153) * 0.98 + 153;
-// 	// b = (b - 153) * 0.98 + 153;
-// 	// ww = ww * 1.02;
-// 	line(90, 90, ww, hh, 00, 20, 20, 00);  // Draw rectangle
-
-// }
