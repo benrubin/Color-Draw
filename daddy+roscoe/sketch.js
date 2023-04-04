@@ -63,7 +63,7 @@ function splashScreen() {
 	b = random(255);
 	stroke(r,g,b);
 	strokeWeight(20*scFact);
-	var dt = (frameCount % (windowWidth/15)) * 15 * scFact;
+	var dt = (frameCount * 15 * scFact) % (windowWidth/2);
 	line(cx-dt,cy-dt,cx+dt,cy-dt);
 	line(cx+dt,cy-dt,cx+dt,cy+dt);
 	line(cx+dt,cy+dt,cx-dt,cy+dt);
